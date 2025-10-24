@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="js ariketak egiten">
+    <meta name="author" content="Xabier Lazcoz">
+    <title>js ariketak</title>
+</head>
+<body>
+
+<h2>Progress barra (kola simulatuz)</h2>
+
+<p>Klikatu "Hasi" botoian kola botila betetzen simulatzeko:</p>
+
+<progress id="colaProgress" value="0" max="100"></progress>
+
+<p id="progressText">0% beteta</p>
+
+<button onclick="startColaSimulation()">
+Hasi
+</button>
+
+<button onclick="resetProgress()">
+Berrabiarazi
+</button>
+
+<script>
+let progressInterval;
+
+function startColaSimulation() {
+    const progressBar = document.getElementById('colaProgress');
+    const progressText = document.getElementById('progressText');
+    let progressValue = 0;
+    
+    clearInterval(progressInterval);
+    
+    progressInterval = setInterval(function() {
+        if(progressValue < 100) {
+            progressValue += 2;
+            progressBar.value = progressValue;
+            progressText.textContent = progressValue + "% beteta";
+        } else {
+            clearInterval(progressInterval);
+            progressText.textContent = "Kola botila beteta!";
+        }
+    }, 100);
+}
+
+function resetProgress() {
+    clearInterval(progressInterval);
+    const progressBar = document.getElementById('colaProgress');
+    const progressText = document.getElementById('progressText');
+    
+    progressBar.value = 0;
+    progressText.textContent = "0% beteta";
+}
+</script>
+
+</body>
+</html>
